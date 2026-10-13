@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="在南山、福田、宝安寻找适合停留与办公的咖啡馆，查看营业状态、插座、网速与信息来源。">
+  <title>深圳办公咖啡地图</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script defer src="app.js"></script>
+  <link rel="icon" href="data:,">
+</head>
+<body>
+  <header class="masthead">
+    <div class="brand-mark" aria-hidden="true">☕</div>
+    <div><p class="eyebrow">一杯咖啡，一处工作角落</p><h1>深圳办公咖啡地图</h1></div>
+    <span class="region">南山 · 福田 · 宝安</span>
+  </header>
+  <main class="workspace">
+    <aside class="sidebar" aria-label="筛选与未定位咖啡店">
+      <div class="sidebar-intro"><h2>找到你的下一站</h2><p>看看窗外的风景，也看看插座和网速。</p></div>
+      <details id="filter-panel" open>
+        <summary>筛选咖啡店<span class="fold-hint">展开 / 收起</span></summary>
+        <form id="filters">
+          <fieldset><legend>区域 <span>可多选</span></legend>
+            <div class="district-options">
+              <label><input type="checkbox" name="district" value="南山" checked>南山</label>
+              <label><input type="checkbox" name="district" value="福田" checked>福田</label>
+              <label><input type="checkbox" name="district" value="宝安" checked>宝安</label>
+            </div>
+          </fieldset>
+          <fieldset><legend>营业状态 <span>可多选</span></legend>
+            <label class="status-option"><input type="checkbox" name="status" value="确认还开" checked><i class="dot green"></i>确认还开</label>
+            <label class="status-option"><input type="checkbox" name="status" value="大概率还开" checked><i class="dot blue"></i>大概率还开</label>
+            <label class="status-option"><input type="checkbox" name="status" value="不确定" checked><i class="dot gray"></i>不确定</label>
+            <label class="status-option"><input type="checkbox" name="status" value="大概率已关"><i class="dot red"></i>大概率已关</label>
+          </fieldset>
+          <label class="batch-label" for="batch">收录批次</label>
+          <select id="batch" name="batch"><option value="">全部批次</option><option>经典</option><option>小众</option><option>GitHub核对</option></select>
+          <button class="reset" type="reset">重置筛选</button>
+        </form>
+      </details>
+      <section class="unlocated" aria-labelledby="unlocated-title">
+        <h2 id="unlocated-title">未定位 <span id="unlocated-count">0</span></h2>
+        <p>地址或坐标待确认，点击店名查看详情。</p>
+        <ul id="unlocated-list"></ul>
+      </section>
+    </aside>
+    <section class="map-section" aria-label="咖啡店地图">
+      <div class="map-toolbar"><p aria-live="polite">地图显示 <strong id="count">0</strong> 家 <span id="result-note"></span></p><button id="overview" type="button">查看全图</button></div>
+      <div class="map-wrap"><div id="map" aria-label="深圳咖啡店地图"></div><p id="load-message" role="status">正在加载咖啡店…</p></div>
+      <div class="map-note"><span class="approx-dot" aria-hidden="true"></span>虚线、半透明标记：位置为大致位置<span class="map-instruction">点击标记查看详情</span></div>
+    </section>
+  </main>
+  <footer>数据日期 2026-10-13 <span>·</span> 信息可能过时，请出发前确认 <span>·</span> 坐标系 WGS84</footer>
+  <dialog id="cafe-dialog" aria-labelledby="dialog-title"><button id="close-dialog" type="button" aria-label="关闭详情">关闭 ×</button><div id="dialog-content"></div></dialog>
+  <noscript>请启用浏览器的 JavaScript 以使用地图与筛选功能。</noscript>
+</body>
+</html>
